@@ -4,28 +4,28 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0"
-    }
+    # tls = {
+    #   source  = "hashicorp/tls"
+    #   version = "~> 4.0"
+    # }
   }
 }
 
 
 
-# Configure the AWS Provider
-provider "aws" {
-  region     = var.aws_region     # variable.tf 의 aws_region 변수사용
+# # Configure the AWS Provider
+# provider "aws" {
+#   region     = var.aws_region     # variable.tf 의 aws_region 변수사용
 
-}
+# }
 
 
 
-# aws_vpc/tf파일들의 내용을 불러와서 사용
-module "vpc" {
-  source = "https://github.com/chlals096/aws_vpc.git"
-  # cidr_network = "192.168.0.0/16"
-}
+# # aws_vpc/tf파일들의 내용을 불러와서 사용
+# module "vpc" {
+#   source = "https://github.com/chlals096/aws_vpc.git"
+#   # cidr_network = "192.168.0.0/16"
+# }
 
 
 
@@ -41,35 +41,35 @@ module "vpc" {
 
 
 
-# aws_subnet/...tf파일들의 내용을 불러와서 사용
-module "subnet" {
-  source = "https://github.com/chlals096/aws_subnet.git"
-  # cidr_block = "192.168.0.0/24" # 기본은 aws_subnet/variable 의 cidr_block / 여기에 Cidr을 입력하면 
-  vpc_id = module.vpc.vpc_id
-}
+# # aws_subnet/...tf파일들의 내용을 불러와서 사용
+# module "subnet" {
+#   source = "https://github.com/chlals096/aws_subnet.git"
+#   # cidr_block = "192.168.0.0/24" # 기본은 aws_subnet/variable 의 cidr_block / 여기에 Cidr을 입력하면 
+#   vpc_id = module.vpc.vpc_id
+# }
 
 
 
 
 
 
-module "keypair" {
-  source   = "https://github.com/chlals096/aws_keypair.git"
-  key_name = "terra_gen_key-bo-07"
-}
+# module "keypair" {
+#   source   = "https://github.com/chlals096/aws_keypair.git"
+#   key_name = "terra_gen_key-bo-07"
+# }
 
 
 
 
 
 
-module "instance" {
-  source    = "./aws_instance/"
-  subnet_id = module.subnet.subnet_output_id
-  key_name  = module.keypair.key_name
-  sg_name   = module.security-group.sg_name
-  sg_id     = module.security-group.sg_id
-}
+# module "instance" {
+#   source    = "./aws_instance/"
+#   subnet_id = module.subnet.subnet_output_id
+#   key_name  = module.keypair.key_name
+#   sg_name   = module.security-group.sg_name
+#   sg_id     = module.security-group.sg_id
+# }
 
 
 
