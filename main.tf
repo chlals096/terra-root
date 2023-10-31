@@ -16,22 +16,17 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region     = var.aws_region     # variable.tf 의 aws_region 변수사용
-  access_key = var.aws_access_key # variable.tf 의 aws_access_key 변수사용
-  secret_key = var.aws_secret_key # variable.tf 의 aws_secret_key 변수사용
+
 }
 
 
 
 # aws_vpc/tf파일들의 내용을 불러와서 사용
 module "vpc" {
-  source = "./aws_vpc/"
+  source = "https://github.com/chlals096/aws_vpc.git"
   # cidr_network = "192.168.0.0/16"
 }
 
-module "igw" {
-  source = "./aws_igw"
-  vpc_id = module.vpc.vpc_id
-}
 
 
 
@@ -48,31 +43,22 @@ module "igw" {
 
 # aws_subnet/...tf파일들의 내용을 불러와서 사용
 module "subnet" {
-  source = "./aws_subnet/"
+  source = "https://github.com/chlals096/aws_subnet.git"
   # cidr_block = "192.168.0.0/24" # 기본은 aws_subnet/variable 의 cidr_block / 여기에 Cidr을 입력하면 
   vpc_id = module.vpc.vpc_id
 }
 
 
-module "route" {
-  source = "./aws_route"
-  vpc_id = module.vpc.vpc_id
-  gateway_id = module.igw.igw
-  cidr_block = module.subnet.subent_cidr_block
-}
+
 
 
 
 module "keypair" {
-  source   = "./aws_keypair/"
+  source   = "https://github.com/chlals096/aws_keypair.git"
   key_name = "terra_gen_key-bo-07"
 }
 
 
-module "security-group" {
-  source = "./aws_sg"
-  vpc_id = module.vpc.vpc_id
-}
 
 
 
