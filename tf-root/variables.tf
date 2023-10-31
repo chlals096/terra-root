@@ -15,7 +15,7 @@ variable "aws_access_key" {
   type        = string
   description = "AWS access-key 입니다."
   sensitive   = true
-  default     = ""
+  
 }
 
 
@@ -23,5 +23,5 @@ variable "aws_secret_key" {
   type        = string
   description = "AWS secret key 입니다"
   sensitive   = true
-  default     = ""
+  
 }

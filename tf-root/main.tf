@@ -21,11 +21,11 @@ terraform {
 
 
 
-# # aws_vpc/tf파일들의 내용을 불러와서 사용
-# module "vpc" {
-#   source = "https://github.com/chlals096/aws_vpc.git"
-#   # cidr_network = "192.168.0.0/16"
-# }
+# aws_vpc/tf파일들의 내용을 불러와서 사용
+module "vpc" {
+  source = "github.com/chlals096/aws_vpc.git"
+  # cidr_network = "192.168.0.0/16"
+}
 
 
 
@@ -53,10 +53,10 @@ terraform {
 
 
 
-# module "keypair" {
-#   source   = "https://github.com/chlals096/aws_keypair.git"
-#   key_name = "terra_gen_key-bo-07"
-# }
+module "keypair" {
+  source   = "github.com/chlals096/aws_keypair.git"
+  # key_name = "terra_gen_key-bo-07"
+}
 
 
 
