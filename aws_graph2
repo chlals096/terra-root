@@ -1,0 +1,25 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_instance.terra_insance (expand)" [label = "aws_instance.terra_insance", shape = "box"]
+		"[root] aws_subnet.terra_private_subnet (expand)" [label = "aws_subnet.terra_private_subnet", shape = "box"]
+		"[root] aws_subnet.terra_public_subnet (expand)" [label = "aws_subnet.terra_public_subnet", shape = "box"]
+		"[root] aws_vpc.terra_vpc (expand)" [label = "aws_vpc.terra_vpc", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] var.aws_access_key" [label = "var.aws_access_key", shape = "note"]
+		"[root] var.aws_region" [label = "var.aws_region", shape = "note"]
+		"[root] var.aws_secret_key" [label = "var.aws_secret_key", shape = "note"]
+		"[root] aws_instance.terra_insance (expand)" -> "[root] aws_subnet.terra_public_subnet (expand)"
+		"[root] aws_subnet.terra_private_subnet (expand)" -> "[root] aws_vpc.terra_vpc (expand)"
+		"[root] aws_subnet.terra_public_subnet (expand)" -> "[root] aws_vpc.terra_vpc (expand)"
+		"[root] aws_vpc.terra_vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_instance.terra_insance (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_subnet.terra_private_subnet (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.aws_access_key"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.aws_region"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.aws_secret_key"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
